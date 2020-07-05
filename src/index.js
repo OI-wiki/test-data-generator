@@ -3,23 +3,20 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider } from '@material-ui/core'
+import theme from './Theme'
+import { CustomCssBaseline } from './Theme'
 import { createStore } from 'redux'
 import rootReducer from './Store/Reducers'
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <CssBaseline />
-    <App />
+    <MuiThemeProvider theme={theme}>
+      <CustomCssBaseline />
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById("root")
 );
