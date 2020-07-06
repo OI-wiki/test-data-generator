@@ -4,6 +4,7 @@ import { Container, Typography, AppBar, Box, Toolbar, IconButton,
 import { Settings, GitHub, Menu } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
+import NavigationBar from './NavigationBar'
 
 const drawerWidth = 250
 
@@ -66,7 +67,7 @@ const Header = () => {
                     >
                       <Tooltip title="数据类型">
                         <IconButton
-                            color="inherit"
+                            // color="inherit"
                             aria-label="open drawer"
                             // onClick={handleDrawerToggle}
                             className={classes.menuButton}
@@ -74,8 +75,12 @@ const Header = () => {
                             <Menu />
                         </IconButton>
                       </Tooltip>
-                      <Button href="/" color="inherit">
-                          <Typography variant="h6" noWrap>
+                      <Button href="/" 
+                        // color="inherit"
+                      >
+                          <Typography component="span"
+                          // variant="h6" 
+                          noWrap>
                           OI Wiki 测试用例生成工具
                           </Typography>
                       </Button>

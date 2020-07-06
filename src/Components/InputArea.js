@@ -5,7 +5,7 @@ import { Container, Typography, Card } from '@material-ui/core'
 const InputArea = () => {
     return(
         <Container>
-            <Typography>
+            <Typography component={"span"}>
                 <Card>
                     input area
                 </Card>
