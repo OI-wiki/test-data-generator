@@ -1,17 +1,19 @@
 import React from 'react'
 import { Container, Typography, AppBar, Box, Toolbar, IconButton,
-    Button, Tooltip } from '@material-ui/core'
+    Button, Tooltip, Drawer, CardContent, Hidden } from '@material-ui/core'
 import { Settings, GitHub, Menu } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
-import NavigationBar from './NavigationBar'
+import NavBar from '../Components/NavigationBar'
+import { connect } from 'react-redux'
+import { toggleDrawer } from '../Store/Actions'
 
 const drawerWidth = 250
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
       width: drawerWidth,
-      flexShrink: 0,
+      // flexShrink: 0,
     },
     hiddenDrawer: {
       [theme.breakpoints.down('md')]: {
@@ -47,15 +49,43 @@ const useStyles = makeStyles((theme) => ({
     // drawerPaper: scrollbarStyle(theme, {
     //   width: drawerWidth,
     // }),
+    drawerPaper: {
+      width: drawerWidth,
+    },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
     },
   }))
 
-const Header = () => {
+const Header = ({ open, dataType, toggleDrawer }) => {
+    // const { open, toggleDrawer } = props
+    // console.log("lala",open)
     const classes = useStyles()
     const OIWikiGithub = 'https://github.com/OI-wiki/test-data-generator'
+    const list = () => (
+      <Container
+        className={classes.drawer}
+        role="presentation"
+        onClick={toggleDrawer}
+        onKeyDown={toggleDrawer}
+      >
+        <CardContent component={'span'}>
+          this is a list<br/>
+          first line<br/>
+          second line<br/>
+        </CardContent>
+      </Container>
+    );
+
+    const NavBar = () => (
+        <Container>
+          <Drawer anchor={'left'} open={open} onClose={toggleDrawer} component={"span"}>
+            {list}
+          </Drawer>
+        </Container>
+      )
+
     return(
         <Container>
             <AppBar position="fixed" className={classes.appBar}>
@@ -69,7 +99,7 @@ const Header = () => {
                         <IconButton
                             // color="inherit"
                             aria-label="open drawer"
-                            // onClick={handleDrawerToggle}
+                            onClick={toggleDrawer}
                             className={classes.menuButton}
                         >
                             <Menu />
@@ -100,8 +130,39 @@ const Header = () => {
                     </Box>
                 </Toolbar>
             </AppBar>
+        <Drawer
+          variant="temporary"
+          anchor={'left'}
+          open={open}
+          onClose={toggleDrawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <NavBar />
+        </Drawer>
+
         </Container>
     )
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        open: state.open,
+        dataType: state.dataType
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toggleDrawer: (state) => dispatch(toggleDrawer(state))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header);
