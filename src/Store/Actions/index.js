@@ -1,19 +1,7 @@
-import { OPEN_DRAWER, CLOSE_DRAWER, UPDATE_CHARSET, UPDATE_DELIMITER,
-    UPDATE_NUM_CHARS } from './ActionTypes'
-
-export const toggleDrawer = () => (dispatch, getState) => {
-    const state = getState()
-    if (state.open === true) {
-        console.log("CLOSING DRAWER")
-        dispatch({ type: CLOSE_DRAWER })
-    }
-    else {
-        console.log("OPENING DRAWER")
-        dispatch({ type: OPEN_DRAWER })
-    }
-}
+import { UPDATE_CHARSET, UPDATE_DELIMITER, UPDATE_NUM_CHARS } from './ActionTypes'
 
 export const updateCharset = (chars) => (dispatch) => {
+    console.log("charset",chars)
     dispatch({ 
         type: UPDATE_CHARSET, 
         payload: chars

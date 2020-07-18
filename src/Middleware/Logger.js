@@ -2,7 +2,7 @@
 
 const logger = store => next => action => {
     console.group(action.type)
-    console.info('DISPATCHING', action)
+    console.info('DISPATCHING', action.type)
     let result = next(action)
     console.log('NEXT STATE', store.getState())
     console.groupEnd()
