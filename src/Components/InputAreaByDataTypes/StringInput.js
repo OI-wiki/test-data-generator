@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux'
-import { Container, Typography, Box, Grid, CardContent, TextField,
-    Switch, FormControlLabel, RadioGroup, Radio } from '@material-ui/core'
+import { Container, Typography, Box, Grid, CardContent, TextField, FormControl, Radio,
+    Switch, FormControlLabel, RadioGroup } from '@material-ui/core'
 // import Autocomplete from '@material-ui/lab/Autocomplete'
 import { makeStyles } from '@material-ui/core/styles'
-import { updateCharset, updateNumChars } from '../../Store/Actions'
-import MyRadio from './MyRadio'
+import { updateCharset, updateNumChars, updateDelimiter } from '../../Store/Actions'
 
 const useStyles = makeStyles({
     text: {
@@ -23,6 +22,7 @@ const predefinedCharset = {
     'a-z&A-Z': 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
 
+// for autocomplete component
 // const predefinedCharset = [
 //     {description: 'abc', char: 'abc'},
 //     {description: 'a-z', char: 'abcdefghijklmnopqrstuvwxyz'},
@@ -37,11 +37,11 @@ const predefinedCharset = {
 
 
 const StringInput = (props) => {
-    const { updateCharset, updateDelimiter, updateNumChars} = props;
-    const classes = useStyles();
-    let checkedChar_az, checkedChar_AZ, checkedChar_azAZ
+    const { updateCharset, updateDelimiter, updateNumChars} = props
+    const classes = useStyles()
     const [customCharset, setCustomCharset] = useState(true)
     const [useDelimiter, setUseDelimiter] = useState(false)
+    const [value, setValue] = useState('a-z')
     
     return (
         <Container>
@@ -59,56 +59,35 @@ const StringInput = (props) => {
                             <CardContent>快速选择测试用例字符库：</CardContent>
                         </Grid>
                         <Grid item className={classes.line}>
-                            <RadioGroup row>
-                                <MyRadio 
-                                    label={'a-z'} 
-                                    checked={checkedChar_az} 
-                                    func={()=>updateCharset(predefinedCharset['a-z'])} 
-                                />
-                                <MyRadio 
-                                    label={'A-Z'} 
-                                    checked={checkedChar_AZ} 
-                                    func={()=>updateCharset(predefinedCharset['A-Z'])} 
-                                />
-                                <MyRadio 
-                                    label={'a-z and A-Z'} 
-                                    checked={checkedChar_azAZ} 
-                                    func={()=>updateCharset(predefinedCharset['a-z&A-Z'])} 
-                                />
-                                {/* <FormControlLabel
+                            <FormControl component='fieldset'>
+                            <RadioGroup row
+                                value={value}
+                                onChange={(e)=> {
+                                    setValue(e.target.value)
+                                    console.log("value",e.target.value)
+                                    updateCharset(predefinedCharset[e.target.value])
+                                }}
+                            >
+                                <FormControlLabel
+                                    value='a-z'
+                                    checked={value === 'a-z'}
+                                    control={<Radio/>}
                                     label='a-z'
-                                    labelPlacement='start'
-                                    control={
-                                        <Radio 
-                                            name='a-z'
-                                            checked={checkedChar_az}
-                                            onClick={()=>updateCharset(predefinedCharset['a-z'])}
-                                        />
-                                    }
                                 />
                                 <FormControlLabel
+                                    value='A-Z'
+                                    checked={value === 'A-Z'}
+                                    control={<Radio/>}
                                     label='A-Z'
-                                    labelPlacement='start'
-                                    control={
-                                        <Radio 
-                                            name='A-Z'
-                                            checked={checkedChar_AZ}
-                                            onClick={()=>updateCharset(predefinedCharset['A-Z'])}
-                                        />
-                                    }
                                 />
                                 <FormControlLabel
-                                    label='a-z and A-Z'
-                                    labelPlacement='start'
-                                    control={
-                                        <Radio 
-                                            name='a-z&A-Z'
-                                            checked={checkedChar_azAZ}
-                                            onClick={()=>updateCharset(predefinedCharset['a-z&A-Z'])}
-                                        />
-                                    }
-                                /> */}
+                                    value='a-z&A-Z'
+                                    checked={value === 'a-z&A-Z'}
+                                    control={<Radio/>}
+                                    label='a-z&A-Z'
+                                />
                             </RadioGroup>
+                            </FormControl>
                         </Grid>
                         <Grid item className={classes.line}>
                         <FormControlLabel
@@ -251,11 +230,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateCharset: (c) => dispatch(updateCharset(c)),
-        updateNumChars: (n) => dispatch(updateNumChars(n)),
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
+    updateCharset: (c) => dispatch(updateCharset(c)),
+    updateNumChars: (n) => dispatch(updateNumChars(n)),
+    updateDelimiter: (d) => dispatch(updateDelimiter(d)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(StringInput)

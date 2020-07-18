@@ -1,9 +1,12 @@
 import React from 'react'
-import { Container, Grid, Typography, Card, Box, Button } from '@material-ui/core'
+import { Container, Grid, Card, CardContent, SvgIcon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { useSelector } from 'react-redux'
 import String from './InputAreaByDataTypes/StringInput'
-import { connect } from 'react-redux'
-import { updateCharset } from '../Store/Actions'
+import Vector from './InputAreaByDataTypes/VectorInput'
+import Tree from './InputAreaByDataTypes/TreeInput'
+import Graph from './InputAreaByDataTypes/GraphInput'
+// import { mdiArrowTopLeftThick } from '@mdi/js'
 
 const useStyles = makeStyles({
   inputBox: {
@@ -16,8 +19,30 @@ const useStyles = makeStyles({
   }
 })
 
-const InputArea = (props) => {
-    const classes = useStyles();
+const InputArea = () => {
+    const classes = useStyles()
+    const dataType = useSelector(state => state.dataType)
+    const renderInputAreaByType = (type) => {
+      console.log("current data type", type)
+        if (type === 'String')
+          return <String/>
+        else if (type === 'Vector')
+          return <Vector/>
+        else if (type === 'Tree')
+          return <Tree/>
+        else if (type === 'Graph')
+          return <Graph/>
+        else
+          return (
+            <Container>
+              {/* <SvgIcon path={mdiArrowTopLeftThick} /> */}
+              <CardContent>
+                  请先选择测试用例的数据类型
+              </CardContent>
+            </Container>
+          )
+    }
+
     return(
         <Container fixed 
             className={classes.inputBox}
@@ -27,31 +52,16 @@ const InputArea = (props) => {
                 direction='column'
                 spacing={2}
           >
-            <Card raised
+            <Card raised component={'span'}
               className={classes.card}
             >
-              <String/>
+
+                {renderInputAreaByType(dataType)}
+
             </Card>
           </Grid>
         </Container>
     )
 }
 
-const mapStateToProps = (state) => {
-  return {
-      open: state.open,
-      dataType: state.dataType,
-      chars: ''
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-      updateCharset: (chars) => dispatch(updateCharset(chars))
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InputArea);
+export default InputArea

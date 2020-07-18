@@ -1,14 +1,13 @@
 import React from 'react'
 import { Container, Typography, Card, Box } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 
-const VectorInput = () => {
+const GraphInput = () => {
     return (
         <Container>
             <Box>
             <Typography component={"span"}>
             <Card>
-                Vector input area
+                Graph input area
             </Card>
             </Typography>
             </Box>
@@ -16,4 +15,4 @@ const VectorInput = () => {
     )
 }
 
-export default VectorInput
+export default GraphInput

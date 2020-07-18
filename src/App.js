@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Typography, Grid } from '@material-ui/core'
 import Header from './Components/Header'
+import NavBar from './Components/NavigationBar'
 import InputArea from './Components/InputArea'
 import OutputArea from './Components/OutputArea'
 import Footer from './Components/Footer'
@@ -14,12 +15,9 @@ const App = () => {
       <Grid container
         direction="row"
       >
-          <Grid item>
-            <InputArea />
-          </Grid>
-          <Grid item>
-            <OutputArea />
-          </Grid>
+          <Grid><NavBar/></Grid>
+          <Grid item><InputArea/></Grid>
+          <Grid item><OutputArea/></Grid>
       </Grid>
       <Typography component={"span"}>
         <Footer />
