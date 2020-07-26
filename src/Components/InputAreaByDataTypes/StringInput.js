@@ -4,6 +4,8 @@ import { Container, Typography, Box, Grid, CardContent, TextField, FormControl, 
     Switch, FormControlLabel, RadioGroup } from '@material-ui/core'
 // import Autocomplete from '@material-ui/lab/Autocomplete'
 import { makeStyles } from '@material-ui/core/styles'
+import { useDispatch } from 'react-redux'
+import { UPDATE_NUM_CASES } from '../../Store/Actions/ActionTypes'
 import { updateCharset, updateNumChars, updateDelimiter } from '../../Store/Actions'
 
 const useStyles = makeStyles({
@@ -39,6 +41,7 @@ const predefinedCharset = {
 const StringInput = (props) => {
     const { updateCharset, updateDelimiter, updateNumChars} = props
     const classes = useStyles()
+    const dispatch = useDispatch();
     const [customCharset, setCustomCharset] = useState(true)
     const [useDelimiter, setUseDelimiter] = useState(false)
     const [value, setValue] = useState('a-z')
@@ -208,7 +211,11 @@ const StringInput = (props) => {
                             label='Required'
                             fullWidth
                             name='delimiter'
-                            onChange={(e)=>updateNumChars(e.target.value)}
+                            // onChange={(e)=>updateNumCases(e.target.value)}
+                            onChange={(e) => dispatch({
+                                type: UPDATE_NUM_CASES,
+                                payload: e.target.value
+                            })}
                             variant='outlined'
                         />
                     </Grid>

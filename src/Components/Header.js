@@ -5,7 +5,7 @@ import { Settings, GitHub, Menu, HighlightOff } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
 import { useDispatch, useSelector } from 'react-redux'
-import {OPEN_DRAWER,CLOSE_DRAWER} from '../Store/Actions/ActionTypes'
+import { OPEN_DRAWER,CLOSE_DRAWER } from '../Store/Actions/ActionTypes'
 
 const drawerWidth = 250
 
