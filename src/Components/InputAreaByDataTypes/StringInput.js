@@ -5,8 +5,7 @@ import { Container, Typography, Box, Grid, CardContent, TextField, FormControl, 
 // import Autocomplete from '@material-ui/lab/Autocomplete'
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch } from 'react-redux'
-import { UPDATE_NUM_CASES } from '../../Store/Actions/ActionTypes'
-import { updateCharset, updateNumChars, updateDelimiter } from '../../Store/Actions'
+import { UPDATE_NUM_CASES, UPDATE_NUM_CHARS, UPDATE_CHARSET, UPDATE_DELIMITER } from '../../Store/Actions/ActionTypes'
 
 const useStyles = makeStyles({
     text: {
@@ -38,8 +37,7 @@ const predefinedCharset = {
 // };
 
 
-const StringInput = (props) => {
-    const { updateCharset, updateDelimiter, updateNumChars} = props
+const StringInput = () => {
     const classes = useStyles()
     const dispatch = useDispatch();
     const [customCharset, setCustomCharset] = useState(true)
@@ -67,8 +65,11 @@ const StringInput = (props) => {
                                 value={value}
                                 onChange={(e)=> {
                                     setValue(e.target.value)
-                                    console.log("value",e.target.value)
-                                    updateCharset(predefinedCharset[e.target.value])
+                                    // updateCharset(predefinedCharset[e.target.value])
+                                    dispatch({
+                                        type: UPDATE_CHARSET,
+                                        payload: predefinedCharset[e.target.value]
+                                    })
                                 }}
                             >
                                 <FormControlLabel
@@ -117,7 +118,11 @@ const StringInput = (props) => {
                                             autoFocus
                                             fullWidth
                                             name='chars'
-                                            onChange={(e)=>updateCharset(e.target.value)}
+                                            // onChange={(e)=>updateCharset(e.target.value)}
+                                            onChange={(e) => dispatch ({
+                                                type: UPDATE_CHARSET,
+                                                payload: e.target.value
+                                            })}
                                             variant='outlined'
                                         />
                                     </Grid>
@@ -160,7 +165,11 @@ const StringInput = (props) => {
                             label='Required'
                             fullWidth
                             name='delimiter'
-                            onChange={(e)=>updateNumChars(e.target.value)}
+                            // onChange={(e)=>updateNumChars(e.target.value)}
+                            onChange={(e) => dispatch({
+                                type: UPDATE_NUM_CHARS,
+                                payload: e.target.value
+                            })}
                             variant='outlined'
                         />
                     </Grid>
@@ -194,7 +203,11 @@ const StringInput = (props) => {
                                         fullWidth
                                         autoFocus
                                         name='delimiter'
-                                        onChange={(e)=>updateDelimiter(e.target.value)}
+                                        // onChange={(e)=>updateDelimiter(e.target.value)}
+                                        onChange={(e) => dispatch({
+                                            type: UPDATE_DELIMITER,
+                                            payload: e.target.value
+                                        })}
                                         variant='outlined'
                                     />
                             </Grid>
@@ -228,19 +241,4 @@ const StringInput = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        ...state,
-        chars: state.chars,
-        numChars: state.numChars,
-        delimiter: state.delimiter,
-    }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-    updateCharset: (c) => dispatch(updateCharset(c)),
-    updateNumChars: (n) => dispatch(updateNumChars(n)),
-    updateDelimiter: (d) => dispatch(updateDelimiter(d)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(StringInput)
+export default StringInput
