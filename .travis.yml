@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+    - 12.16.2
+cache: npm
+
+# default
+install:
+    - npm ci
+
+# default
+scripts:
+    - npm test
+    - npm run build
+
+deploy:
+    - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    on:
+        branch: master
+
+# NOTE for developers: common travis ci hooks
+# before_install:
+# install:
+# before_script:
+# after_success:
+# after_failure:
+# after_script:
+# deploy:
+# after_deploy:
