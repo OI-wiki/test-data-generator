@@ -8,7 +8,7 @@
 // })
 
 import { OPEN_DRAWER, CLOSE_DRAWER, UPDATE_CHARSET, UPDATE_DELIMITER, 
-    UPDATE_NUM_CHARS, SET_DATATYPE } from '../Actions/ActionTypes'
+    UPDATE_NUM_CHARS, SET_DATATYPE, UPDATE_NUM_CASES } from '../Actions/ActionTypes'
 
 const initState = {
     open: false,
@@ -16,6 +16,7 @@ const initState = {
     chars: '',
     numChars: 0,
     delimiter: '',
+    numCases: 0,
 }
 
 const reducer = (state=initState, action) => {
@@ -49,6 +50,11 @@ const reducer = (state=initState, action) => {
             return {
                 ...state,
                 delimiter: action.payload
+            }
+        case UPDATE_NUM_CASES:
+            return {
+                ...state,
+                numCases: action.payload
             }
         default:
             return state
