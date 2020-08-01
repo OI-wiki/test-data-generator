@@ -1,6 +1,7 @@
 # Test Data Generator
 
-正在开发中的测试数据生成工具。
+[![Build Status](https://travis-ci.com/OI-wiki/test-data-generator.svg?branch=master)](https://travis-ci.com/OI-wiki/test-data-generator)
+<br/>正在开发中的测试数据生成工具。
 
 ## License
 
