@@ -9,21 +9,23 @@ import Footer from './Components/Footer'
 const App = () => {
   return (
     <Container>
-      <Typography component={"span"}>
-        <Header />
-      </Typography>
-      <Grid container
-        direction="row"
-      >
-          <Grid><NavBar/></Grid>
-          <Grid item><InputArea/></Grid>
-          <Grid item><OutputArea/></Grid>
-      </Grid>
-      <Typography component={"span"}>
-        <Footer />
-      </Typography>
+        <Typography component={"span"}>
+            <Header />
+        </Typography>
+        <Typography component={"span"}>
+            <Grid container
+              direction="row"
+            >
+                <Grid item><NavBar/></Grid>
+                <Grid item><InputArea/></Grid>
+                <Grid item><OutputArea/></Grid>
+            </Grid>
+        </Typography>
+        <Typography component={"span"}>
+            <Footer />
+        </Typography>
     </Container>
   )
 }
 
-export default App;
+export default App

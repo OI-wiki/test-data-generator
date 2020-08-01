@@ -17,6 +17,8 @@ const useStyles = makeStyles({
     paddingTop: 15,
     paddingRight: 10,
     paddingBottom: 10,
+    minWidth: 500,
+    minHeight: 400
   }
 })
 
