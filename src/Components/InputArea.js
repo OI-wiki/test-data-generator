@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, Grid, Card, CardContent, SvgIcon } from '@material-ui/core'
+import { Container, Grid, Card, CardContent } from '@material-ui/core'
+// import { Container, Grid, Card, CardContent, SvgIcon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
 import String from './InputAreaByDataTypes/StringInput'

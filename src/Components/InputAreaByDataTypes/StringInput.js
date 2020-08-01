@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { connect } from 'react-redux'
 import { Container, Typography, Box, Grid, CardContent, TextField, FormControl, Radio,
     Switch, FormControlLabel, RadioGroup } from '@material-ui/core'
 // import Autocomplete from '@material-ui/lab/Autocomplete'
