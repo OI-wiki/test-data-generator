@@ -39,12 +39,12 @@ const App = () => {
                               direction='row'
                               spacing={3}
                             >
-                                <Grid item sm={3}>
+                                <Grid item xs={3} sm={3}>
                                   <Button className={classes.button}>
                                       Submit
                                   </Button>
                                 </Grid>
-                                <Grid item sm={3}>
+                                <Grid item xs={3} sm={3}>
                                   <Button className={classes.button}>
                                       Clear
                                   </Button>
