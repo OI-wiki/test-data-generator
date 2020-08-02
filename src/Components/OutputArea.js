@@ -4,11 +4,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   outputBox: {
-    marginTop: 80,
+    marginTop: 30,
   },
   card: {
     marginLeft: 20,
-    paddingTop: 15,
     paddingBottom: 20,
     minWidth: 300,
     minHeight: 300
