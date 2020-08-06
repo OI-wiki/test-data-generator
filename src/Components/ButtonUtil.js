@@ -17,11 +17,12 @@ const useStyles = makeStyles({
 const ButtonUtil = () => {
     const classes = useStyles()
     const dataType = useSelector(state => state.dataType)
-    const StartGenerator = (state) => {
+    const allState = useSelector(state => state)
+    const StartGenerator = () => {
         console.log('---------------GEN START')
-            switch (state) {
+            switch (dataType) {
                 case 'String': 
-                    startStringGen()
+                    startStringGen(allState)
                     break
                 case 'Vector':
                     startVectorGen()
@@ -40,8 +41,7 @@ const ButtonUtil = () => {
             >
             <Grid item xs={3} sm={3}>
                 <Button className={classes.button}
-                    onClick={() => StartGenerator(dataType)}
-                    // onClick={() => startStringGen()}
+                    onClick={() => StartGenerator()}
                 >
                     Submit
                 </Button>
