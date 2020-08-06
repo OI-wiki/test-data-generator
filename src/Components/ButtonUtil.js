@@ -25,7 +25,7 @@ const ButtonUtil = () => {
                     startStringGen(allState)
                     break
                 case 'Vector':
-                    startVectorGen()
+                    startVectorGen(allState)
                     break
                 default:
                     console.log('Please select data type')

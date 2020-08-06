@@ -8,6 +8,5 @@ export const UPDATE_NUM_CHARS = 'UPDATE_NUM_CHARS'
 export const SET_DATATYPE = 'SET_DATATYPE'
 export const UPDATE_NUM_CASES = 'UPDATE_NUM_CASES'
 
-// By data type:
-// String
-export const START_STRING_GEN = 'START_STRING_GEN'
+// outputs
+export const SET_OUTPUT = 'SET_OUTPUT'
