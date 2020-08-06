@@ -1,4 +1,4 @@
 
 export const startVectorGen = () => {
-    console.log("start vector gen")
+    console.log("VECTOR GEN ACTIONS")
 }
