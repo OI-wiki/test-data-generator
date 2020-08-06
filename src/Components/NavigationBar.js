@@ -33,7 +33,7 @@ const NavigationBar = () => {
         <Container
         className={classes.list}
         onClick={()=>dispatch({ type: CLOSE_DRAWER })}
-      >
+        >
         <Card raised>
           <CardContent>
           <CardContent component={'span'} className={classes.title}>请选择测试用例数据类型：</CardContent>

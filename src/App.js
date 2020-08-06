@@ -5,8 +5,11 @@ import NavBar from './Components/NavigationBar'
 import InputArea from './Components/InputArea'
 import OutputArea from './Components/OutputArea'
 import Footer from './Components/Footer'
+import ButtonUtil from './Components/ButtonUtil'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
+import StartGenerator from './Store/Actions'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles({
   button: {
@@ -19,6 +22,7 @@ const useStyles = makeStyles({
 
 const App = () => {
   const classes = useStyles()
+  const dataType = useSelector(state => state.dataType)
   return (
     <Container>
         <Typography component={"span"}>
@@ -35,21 +39,7 @@ const App = () => {
                         direction='column'
                     >
                         <Grid item>
-                            <Grid container
-                              direction='row'
-                              spacing={3}
-                            >
-                                <Grid item xs={3} sm={3}>
-                                  <Button className={classes.button}>
-                                      Submit
-                                  </Button>
-                                </Grid>
-                                <Grid item xs={3} sm={3}>
-                                  <Button className={classes.button}>
-                                      Clear
-                                  </Button>
-                                </Grid>
-                            </Grid>
+                            <ButtonUtil />
                         </Grid>
                         <Grid item><OutputArea/></Grid>
                     </Grid>
