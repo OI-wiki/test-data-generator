@@ -43,12 +43,12 @@ const ButtonUtil = () => {
                 <Button className={classes.button}
                     onClick={() => StartGenerator()}
                 >
-                    Submit
+                    提交
                 </Button>
             </Grid>
             <Grid item xs={3} sm={3}>
                 <Button className={classes.button}>
-                    Clear
+                    全部清除
                 </Button>
             </Grid>
             </Grid>

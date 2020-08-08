@@ -8,15 +8,16 @@
 // })
 
 import { OPEN_DRAWER, CLOSE_DRAWER, UPDATE_CHARSET, UPDATE_DELIMITER, UPDATE_NUM_CHARS, 
-    SET_DATATYPE, UPDATE_NUM_CASES, SET_OUTPUT } from '../Actions/ActionTypes'
+    SET_DATATYPE, UPDATE_NUM_CASES, SET_OUTPUT, UPDATE_ALLOW_DUPLICATE } from '../Actions/ActionTypes'
 
 const initState = {
     open: false,
     dataType: '',
-    chars: '',
+    chars: 'abcdefghijklmnopqrstuvwxyz',
     numChars: 0,
     delimiter: '',
     numCases: 0,
+    allowDuplicate: false,
     output: ''
 }
 
@@ -61,6 +62,11 @@ const reducer = (state=initState, action) => {
             return {
                 ...state,
                 output: action.payload
+            }
+        case UPDATE_ALLOW_DUPLICATE:
+            return {
+                ...state,
+                allowDuplicate: action.payload
             }
         default:
             return state

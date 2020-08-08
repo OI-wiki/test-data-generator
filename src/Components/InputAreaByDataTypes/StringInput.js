@@ -4,7 +4,7 @@ import { Container, Typography, Box, Grid, CardContent, TextField, FormControl, 
 // import Autocomplete from '@material-ui/lab/Autocomplete'
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch } from 'react-redux'
-import { UPDATE_NUM_CASES, UPDATE_NUM_CHARS, UPDATE_CHARSET, UPDATE_DELIMITER } from '../../Store/Actions/ActionTypes'
+import { UPDATE_NUM_CASES, UPDATE_NUM_CHARS, UPDATE_CHARSET, UPDATE_DELIMITER, UPDATE_ALLOW_DUPLICATE } from '../../Store/Actions/ActionTypes'
 
 const useStyles = makeStyles({
     text: {
@@ -42,6 +42,7 @@ const StringInput = () => {
     const [customCharset, setCustomCharset] = useState(true)
     const [useDelimiter, setUseDelimiter] = useState(false)
     const [value, setValue] = useState('a-z')
+    const [allowDuplicate, setAllowDuplicate] = useState(true)
     
     return (
         <Container>
@@ -93,16 +94,16 @@ const StringInput = () => {
                             </FormControl>
                         </Grid>
                         <Grid item className={classes.line}>
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    name="need custom charset"
-                                    checked={customCharset}
-                                    onChange={()=>{setCustomCharset((e)=>!e)}}
-                                />
-                            }
-                            label="自定义字符库"
-                        />
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        name="need custom charset"
+                                        checked={customCharset}
+                                        onChange={()=>{setCustomCharset((e)=>!e)}}
+                                    />
+                                }
+                                label="自定义字符库"
+                            />
                         </Grid>
                         <Grid item className={classes.line}>
                             { customCharset 
@@ -155,24 +156,50 @@ const StringInput = () => {
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item className={classes.line}>
-                        <CardContent>每测试用例字符数量：</CardContent>
-                    </Grid>
-                    <Grid item className={classes.line}>
-                        <TextField 
-                            className={classes.text}
-                            label='Required'
-                            fullWidth
-                            name='delimiter'
-                            // onChange={(e)=>updateNumChars(e.target.value)}
-                            onChange={(e) => dispatch({
-                                type: UPDATE_NUM_CHARS,
-                                payload: e.target.value
-                            })}
-                            variant='outlined'
-                        />
-                    </Grid>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                name="allow duplicate chars"
+                                checked={allowDuplicate}
+                                onChange={
+                                    (e) => {
+                                        setAllowDuplicate((v)=>!v)
+                                        dispatch({
+                                            type: UPDATE_ALLOW_DUPLICATE,
+                                            payload: e.target.value
+                                        })
+                                    }
+                                }
+                            />
+                        }
+                        label="允许字符重复"
+                    />
                 </Grid>
+                
+                    { !allowDuplicate
+                        ? 
+                        <Grid container>
+                            <Grid item className={classes.line}>
+                                <CardContent>每测试用例字符数量：</CardContent>
+                            </Grid>
+                            <Grid item className={classes.line}>
+                                <TextField 
+                                    className={classes.text}
+                                    label='Required'
+                                    fullWidth
+                                    name='delimiter'
+                                    // onChange={(e)=>updateNumChars(e.target.value)}
+                                    onChange={(e) => dispatch({
+                                        type: UPDATE_NUM_CHARS,
+                                        payload: e.target.value
+                                    })}
+                                    variant='outlined'
+                                />
+                            </Grid>
+                        </Grid>
+                        :
+                        <Box />
+                    }
                 <Grid container
                     direction='column'
                     spacing={2}
