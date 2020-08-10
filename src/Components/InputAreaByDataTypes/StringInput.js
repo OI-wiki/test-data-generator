@@ -161,12 +161,11 @@ const StringInput = () => {
                             <Switch
                                 name="allow duplicate chars"
                                 checked={allowDuplicate}
-                                onChange={
-                                    (e) => {
+                                onChange={ () => {
                                         setAllowDuplicate((v)=>!v)
                                         dispatch({
                                             type: UPDATE_ALLOW_DUPLICATE,
-                                            payload: e.target.value
+                                            payload: !allowDuplicate
                                         })
                                     }
                                 }
@@ -176,7 +175,7 @@ const StringInput = () => {
                     />
                 </Grid>
                 
-                    { !allowDuplicate
+                    { allowDuplicate
                         ? 
                         <Grid container>
                             <Grid item className={classes.line}>
