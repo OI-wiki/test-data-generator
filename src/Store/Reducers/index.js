@@ -17,7 +17,7 @@ const initState = {
     numChars: 0,
     delimiter: '',
     numCases: 0,
-    allowDuplicate: false,
+    allowDuplicate: true,
     output: ''
 }
 
