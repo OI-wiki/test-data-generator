@@ -10,7 +10,8 @@ const useStyles = makeStyles({
     marginTop: 100,
     marginBottom: 20,
     marginLeft: 80,
-    background: grey[300]
+    background: grey[300],
+    minWidth: 80
   }
 })
 
