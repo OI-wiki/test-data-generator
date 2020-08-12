@@ -20,6 +20,7 @@ const predefinedCharset = {
     'a-z': 'abcdefghijklmnopqrstuvwxyz',
     'A-Z': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     'a-z&A-Z': 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    '0-9': '0123456789',
 }
 
 // for autocomplete component
@@ -89,6 +90,12 @@ const StringInput = () => {
                                     checked={value === 'a-z&A-Z'}
                                     control={<Radio/>}
                                     label='a-z&A-Z'
+                                />
+                                <FormControlLabel
+                                    value='0-9'
+                                    checked={value === '0-9'}
+                                    control={<Radio/>}
+                                    label='0-9'
                                 />
                             </RadioGroup>
                             </FormControl>
