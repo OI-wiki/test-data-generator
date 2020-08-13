@@ -62,7 +62,7 @@ export const startStringGen = (state, dispatch) => {
             }
         }
     }
-    console.log('RESULT=',result)
+    // console.log('RESULT=',result)
     dispatch({
         type: SET_OUTPUT,
         payload: result
