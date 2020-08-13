@@ -1,13 +1,14 @@
-// inputs
-export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
+// General actions
 export const OPEN_DRAWER = "OPEN_DRAWER"
 export const CLOSE_DRAWER = "CLOSE_DRAWER"
+export const SET_DATATYPE = 'SET_DATATYPE'
+export const SET_OUTPUT = 'SET_OUTPUT'
+export const ALTER_ALL = 'ALTER_ALL'
+
+// String
 export const UPDATE_CHARSET = 'UPDATE_CHARSET'
 export const UPDATE_DELIMITER = 'UPDATE_DELIMITER'
 export const UPDATE_NUM_CHARS = 'UPDATE_NUM_CHARS'
-export const SET_DATATYPE = 'SET_DATATYPE'
 export const UPDATE_NUM_CASES = 'UPDATE_NUM_CASES'
 export const UPDATE_ALLOW_DUPLICATE = 'UPDATE_ALLOW_DUPLICATE'
 
-// outputs
-export const SET_OUTPUT = 'SET_OUTPUT'
