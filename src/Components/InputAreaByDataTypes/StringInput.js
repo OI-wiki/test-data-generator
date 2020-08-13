@@ -181,31 +181,24 @@ const StringInput = () => {
                         label="允许字符重复"
                     />
                 </Grid>
-                
-                    { allowDuplicate
-                        ? 
-                        <Grid container>
-                            <Grid item className={classes.line}>
-                                <CardContent>每测试用例字符数量：</CardContent>
-                            </Grid>
-                            <Grid item className={classes.line}>
-                                <TextField 
-                                    className={classes.text}
-                                    label='Required'
-                                    fullWidth
-                                    name='delimiter'
-                                    // onChange={(e)=>updateNumChars(e.target.value)}
-                                    onChange={(e) => dispatch({
-                                        type: UPDATE_NUM_CHARS,
-                                        payload: e.target.value
-                                    })}
-                                    variant='outlined'
-                                />
-                            </Grid>
-                        </Grid>
-                        :
-                        <Box />
-                    }
+                <Grid container>
+                    <Grid item className={classes.line}>
+                        <CardContent>每测试用例字符数量：</CardContent>
+                    </Grid>
+                    <Grid item className={classes.line}>
+                        <TextField 
+                            className={classes.text}
+                            label='Required'
+                            fullWidth
+                            name='delimiter'
+                            onChange={(e) => dispatch({
+                                type: UPDATE_NUM_CHARS,
+                                payload: e.target.value
+                            })}
+                            variant='outlined'
+                        />
+                    </Grid>
+                </Grid>
                 <Grid container
                     direction='column'
                     spacing={2}
