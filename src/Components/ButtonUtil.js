@@ -2,8 +2,9 @@ import React from 'react'
 import { Container, Grid, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { startStringGen, startVectorGen } from '../Store/Actions'
+import { ALTER_ALL } from '../Store/Actions/ActionTypes'
 
 const useStyles = makeStyles({
   button: {
@@ -17,13 +18,15 @@ const useStyles = makeStyles({
 
 const ButtonUtil = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
     const dataType = useSelector(state => state.dataType)
     const allState = useSelector(state => state)
+
     const StartGenerator = () => {
         console.log('---------------GEN START')
             switch (dataType) {
                 case 'String': 
-                    startStringGen(allState)
+                    startStringGen(allState, dispatch)
                     break
                 case 'Vector':
                     startVectorGen(allState)
@@ -48,7 +51,9 @@ const ButtonUtil = () => {
                 </Button>
             </Grid>
             <Grid item xs={3} sm={3}>
-                <Button className={classes.button}>
+                <Button className={classes.button}
+                    onClick={() => dispatch({ type: ALTER_ALL })}
+                >
                     全部清除
                 </Button>
             </Grid>
