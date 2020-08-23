@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, Typography, AppBar, Box, Toolbar, IconButton,
     Button, Tooltip } from '@material-ui/core'
-import { Settings, GitHub, Menu, HighlightOff } from '@material-ui/icons'
+import { Settings, GitHub, Menu, HighlightOff, Palette } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
 import { useDispatch, useSelector } from 'react-redux'
@@ -54,6 +54,15 @@ const Header = () => {
     const classes = useStyles()
     const OIWikiGithub = 'https://github.com/OI-wiki/test-data-generator'
 
+    const [mode, setMode] = useState('light')
+    const changeMode = () => {
+        if (mode === 'light')
+          setMode('dark')
+        else
+          setMode('light')
+        console.log('switched MODE to', mode)
+    }
+
     return(
         <Container>
             <AppBar position="fixed" className={classes.appBar}>
@@ -99,6 +108,11 @@ const Header = () => {
                     </Box>
                     {/* Right half */}
                     <Box>
+                        <Tooltip title="切换模式" placement="bottom" arrow>
+                          <IconButton onClick={changeMode}>
+                            <Palette />
+                          </IconButton>
+                        </Tooltip>
                         <Tooltip title="设置" placement="bottom" arrow>
                             <IconButton component="a" href="/settings" color="inherit">
                             <Settings />
