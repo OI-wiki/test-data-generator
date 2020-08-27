@@ -74,7 +74,7 @@ const reducer = (state=initState, action) => {
                 ...state,
                 open: false,
                 dataType: '',
-                chars: 'abcdefghijklmnopqrstuvwxyz',
+                chars: '',
                 numChars: 0,
                 delimiter: '',
                 numCases: 0,
