@@ -42,8 +42,9 @@ const StringInput = () => {
     const dispatch = useDispatch();
     const [customCharset, setCustomCharset] = useState(true)
     const [useDelimiter, setUseDelimiter] = useState(false)
-    const [value, setValue] = useState('a-z')
+    const [value, setValue] = useState('')
     const [allowDuplicate, setAllowDuplicate] = useState(true)
+    const [radioDisabled, setRadio] = useState(true)
     
     return (
         <Container>
@@ -58,46 +59,92 @@ const StringInput = () => {
                         className={classes.line}
                     >
                         <Grid>
-                            <CardContent>快速选择测试用例字符库：</CardContent>
+                            <CardContent>快速选择/非自定义测试用例字符库：</CardContent>
                         </Grid>
                         <Grid item className={classes.line}>
                             <FormControl component='fieldset'>
-                            <RadioGroup row
-                                value={value}
-                                onChange={(e)=> {
-                                    setValue(e.target.value)
-                                    // updateCharset(predefinedCharset[e.target.value])
-                                    dispatch({
-                                        type: UPDATE_CHARSET,
-                                        payload: predefinedCharset[e.target.value]
-                                    })
-                                }}
-                            >
-                                <FormControlLabel
-                                    value='a-z'
-                                    checked={value === 'a-z'}
-                                    control={<Radio/>}
-                                    label='a-z'
-                                />
-                                <FormControlLabel
-                                    value='A-Z'
-                                    checked={value === 'A-Z'}
-                                    control={<Radio/>}
-                                    label='A-Z'
-                                />
-                                <FormControlLabel
-                                    value='a-z&A-Z'
-                                    checked={value === 'a-z&A-Z'}
-                                    control={<Radio/>}
-                                    label='a-z&A-Z'
-                                />
-                                <FormControlLabel
-                                    value='0-9'
-                                    checked={value === '0-9'}
-                                    control={<Radio/>}
-                                    label='0-9'
-                                />
-                            </RadioGroup>
+
+                            { !radioDisabled
+                            ?
+
+                                <RadioGroup row
+                                    value={value}
+                                    onChange={(e)=> {
+                                        setValue(e.target.value)
+                                        // updateCharset(predefinedCharset[e.target.value])
+                                        dispatch({
+                                            type: UPDATE_CHARSET,
+                                            payload: predefinedCharset[e.target.value]
+                                        })
+                                    }}
+                                >
+                                    <FormControlLabel
+                                        value='a-z'
+                                        checked={value === 'a-z'}
+                                        control={<Radio/>}
+                                        label='a-z'
+                                    />
+                                    <FormControlLabel
+                                        value='A-Z'
+                                        checked={value === 'A-Z'}
+                                        control={<Radio/>}
+                                        label='A-Z'
+                                    />
+                                    <FormControlLabel
+                                        value='a-z&A-Z'
+                                        checked={value === 'a-z&A-Z'}
+                                        control={<Radio/>}
+                                        label='a-z & A-Z'
+                                    />
+                                    <FormControlLabel
+                                        value='0-9'
+                                        checked={value === '0-9'}
+                                        control={<Radio/>}
+                                        label='0-9'
+                                    />
+                                </RadioGroup>
+
+                            :
+
+                                <RadioGroup row
+                                    value={value}
+                                    onChange={(e)=> {
+                                        setValue(e.target.value)
+                                        // updateCharset(predefinedCharset[e.target.value])
+                                        dispatch({
+                                            type: UPDATE_CHARSET,
+                                            payload: predefinedCharset[e.target.value]
+                                        })
+                                    }}
+                                >
+                                    <FormControlLabel disabled
+                                        value='a-z'
+                                        checked={value === 'a-z'}
+                                        control={<Radio/>}
+                                        label='a-z'
+                                    />
+                                    <FormControlLabel disabled
+                                        value='A-Z'
+                                        checked={value === 'A-Z'}
+                                        control={<Radio/>}
+                                        label='A-Z'
+                                    />
+                                    <FormControlLabel disabled
+                                        value='a-z&A-Z'
+                                        checked={value === 'a-z&A-Z'}
+                                        control={<Radio/>}
+                                        label='a-z & A-Z'
+                                    />
+                                    <FormControlLabel disabled
+                                        value='0-9'
+                                        checked={value === '0-9'}
+                                        control={<Radio/>}
+                                        label='0-9'
+                                    />
+                                </RadioGroup>
+
+                            }
+
                             </FormControl>
                         </Grid>
                         <Grid item className={classes.line}>
@@ -106,7 +153,14 @@ const StringInput = () => {
                                     <Switch
                                         name="need custom charset"
                                         checked={customCharset}
-                                        onChange={()=>{setCustomCharset((e)=>!e)}}
+                                        onChange={()=>{
+                                            setCustomCharset(e=>!e)
+                                            setRadio(e=>!e)
+                                            dispatch({
+                                                type: UPDATE_CHARSET,
+                                                payload: ''
+                                            })
+                                        }}
                                     />
                                 }
                                 label="自定义字符库"
@@ -209,7 +263,13 @@ const StringInput = () => {
                                 <Switch
                                     name="delimiter checked"
                                     checked={useDelimiter}
-                                    onChange={()=>setUseDelimiter((e) => !e)}
+                                    onChange={ () => {
+                                        setUseDelimiter((e) => !e)
+                                        dispatch({
+                                            type: UPDATE_DELIMITER,
+                                            payload: ''
+                                        })
+                                    }}
                                 />
                             }
                             label="需要设置分隔符"
