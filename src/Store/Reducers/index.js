@@ -13,7 +13,7 @@ import { OPEN_DRAWER, CLOSE_DRAWER, UPDATE_CHARSET, UPDATE_DELIMITER, UPDATE_NUM
 const initState = {
     open: false,
     dataType: '',
-    chars: 'abcdefghijklmnopqrstuvwxyz',
+    chars: '',
     numChars: 0,
     delimiter: '',
     numCases: 0,
