@@ -1,18 +1,12 @@
-// import { combineReducers } from 'redux'
-// import string from './String'
-// import navBar from './NavBar'
-
-// export default combineReducers({
-//     navBar,
-//     string
-// })
-
+import { combineReducers } from 'redux'
+import StringReducer from './StringReducer'
+import VectorReducer from './VectorReducer'
 import { OPEN_DRAWER, CLOSE_DRAWER, UPDATE_CHARSET, UPDATE_DELIMITER, UPDATE_NUM_CHARS, 
     SET_DATATYPE, UPDATE_NUM_CASES, SET_OUTPUT, UPDATE_ALLOW_DUPLICATE, ALTER_ALL } from '../Actions/ActionTypes'
-
+    
 const initState = {
     open: false,
-    dataType: '',
+    dataType: 'Vector',
     chars: '',
     numChars: 0,
     delimiter: '',
@@ -21,7 +15,7 @@ const initState = {
     output: ''
 }
 
-const reducer = (state=initState, action) => {
+const rootReducer = (state=initState, action) => {
     switch (action.type) {
         case OPEN_DRAWER:
             return {
@@ -86,4 +80,8 @@ const reducer = (state=initState, action) => {
     }
 }
 
-export default reducer
+export default combineReducers({
+    rootReducer,
+    StringReducer,
+    VectorReducer,
+})
