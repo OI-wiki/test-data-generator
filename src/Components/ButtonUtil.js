@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 const ButtonUtil = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const dataType = useSelector(state => state.dataType)
+    const dataType = useSelector(state => state.rootReducer.dataType)
     const allState = useSelector(state => state)
 
     const StartGenerator = () => {
@@ -29,7 +29,7 @@ const ButtonUtil = () => {
                     startStringGen(allState, dispatch)
                     break
                 case 'Vector':
-                    startVectorGen(allState)
+                    startVectorGen(allState, dispatch)
                     break
                 default:
                     console.log('Please select data type')

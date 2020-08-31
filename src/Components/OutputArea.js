@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 const renderOutputArea = (output) => {
-    console.log("output=",output)
+    // console.log("output=",output)
     if (output === '') {
         return (
             <Container>
@@ -49,7 +49,7 @@ const renderOutputArea = (output) => {
 
 const OutputArea = () => {
     const classes = useStyles()
-    const output = useSelector(state => state.output)
+    const output = useSelector(state => state.rootReducer.output)
     
     return(
         <Container fixed

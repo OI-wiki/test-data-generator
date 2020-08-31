@@ -23,7 +23,7 @@ const items = [
 ]
 
 const NavigationBar = () => {
-    const open = useSelector(state => state.open)
+    const open = useSelector(state => state.rootReducer.open)
     const [value, setValue] = React.useState('')
     const dispatch = useDispatch()
     const classes = useStyles()

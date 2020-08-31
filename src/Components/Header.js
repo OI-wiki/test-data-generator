@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
     const dispatch = useDispatch();
-    const open = useSelector(state => state.open)
+    const open = useSelector(state => state.rootReducer.open)
     const classes = useStyles()
     const OIWikiGithub = 'https://github.com/OI-wiki/test-data-generator'
 
@@ -72,7 +72,7 @@ const Header = () => {
                       display="flex"
                       flexGrow={1}
                     >
-                      {
+                      { 
                         open ?
                               <Tooltip title="关闭菜单">
                                     <IconButton

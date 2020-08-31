@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 const InputArea = () => {
     const classes = useStyles()
-    const dataType = useSelector(state => state.dataType)
+    const dataType = useSelector(state => state.rootReducer.dataType)
     const renderInputAreaByType = (type) => {
       console.log("current data type", type)
         if (type === 'String')
