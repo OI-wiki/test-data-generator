@@ -49,6 +49,7 @@ const StringInput = () => {
     return (
         <Container>
             <Box>
+            <CardContent>STRING</CardContent>
             <Typography component={"span"}>
                 <Grid container
                     direction="row"
