@@ -1,4 +1,4 @@
-import { UPDATE_VECTOR_ELEM_TYPE_str, UPDATE_VECTOR_ELEM_TYPE_int, UPDATE_VECTOR_ELEM_TYPE_float } from "../Actions/ActionTypes";
+import { UPDATE_VECTOR_ELEM_TYPE_str, UPDATE_VECTOR_ELEM_TYPE_int, UPDATE_VECTOR_ELEM_TYPE_float, ALTER_ALL } from "../Actions/ActionTypes";
 
 const initState = {
     typeChecked: {
@@ -33,6 +33,17 @@ const VectorReducer = (state=initState, action) => {
                 typeChecked: {
                     ...state.typeChecked,
                     float: action.payload
+                }
+            }
+        case ALTER_ALL:
+            return {
+                ...state,
+                typeChecked: {
+                    ...state.typeChecked,
+                    string: false,
+                    int: false,
+                    float: false,
+                    vector: false,
                 }
             }
         default:
