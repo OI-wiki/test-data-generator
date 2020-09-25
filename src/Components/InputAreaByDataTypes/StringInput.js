@@ -11,8 +11,12 @@ const useStyles = makeStyles({
       width: 150,
     },
     line: {
-        paddingTop: 10,
-        paddingBottom: 10
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingLeft: 5
+    },
+    radiogroup: {
+        marginLeft: 15
     }
   })
 
@@ -63,6 +67,7 @@ const StringInput = () => {
                             <CardContent>快速选择/非自定义测试用例字符库：</CardContent>
                         </Grid>
                         <Grid item className={classes.line}>
+                            <Grid container className={classes.radiogroup}>
                             <FormControl component='fieldset'>
 
                             { !radioDisabled
@@ -147,6 +152,7 @@ const StringInput = () => {
                             }
 
                             </FormControl>
+                            </Grid>
                         </Grid>
                         <Grid item className={classes.line}>
                             <FormControlLabel
@@ -179,8 +185,8 @@ const StringInput = () => {
                                             label=''
                                             autoFocus
                                             fullWidth
+                                            dense='true'
                                             name='chars'
-                                            // onChange={(e)=>updateCharset(e.target.value)}
                                             onChange={(e) => dispatch ({
                                                 type: UPDATE_CHARSET,
                                                 payload: e.target.value
@@ -245,6 +251,7 @@ const StringInput = () => {
                             className={classes.text}
                             label='Required'
                             fullWidth
+                            dense='true'
                             name='delimiter'
                             onChange={(e) => dispatch({
                                 type: UPDATE_NUM_CHARS,
@@ -288,8 +295,8 @@ const StringInput = () => {
                                         label=''
                                         fullWidth
                                         autoFocus
+                                        dense='true'
                                         name='delimiter'
-                                        // onChange={(e)=>updateDelimiter(e.target.value)}
                                         onChange={(e) => dispatch({
                                             type: UPDATE_DELIMITER,
                                             payload: e.target.value
@@ -309,6 +316,7 @@ const StringInput = () => {
                             className={classes.text}
                             label='Required'
                             fullWidth
+                            dense='true'
                             name='delimiter'
                             // onChange={(e)=>updateNumCases(e.target.value)}
                             onChange={(e) => dispatch({
