@@ -3,7 +3,7 @@ import { SET_OUTPUT } from './ActionTypes'
 export const startVectorGen = (state, dispatch) => {
     console.log("STRING GEN ACTIONS")
     const { chars, numChars, numCases, allowDuplicate, output } = state.rootReducer
-    const { typeChecked } = state.VectorReducer
+    const { string, int, float, vector } = state.VectorReducer
     if (output !== '') {
         console.log('ERROR: output not empty, submit clicked more than once')
     }
