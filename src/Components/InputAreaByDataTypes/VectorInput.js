@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Container, Typography, Grid, Box, CardContent, Checkbox, FormGroup,
-    FormControlLabel, Switch, TextField, Paper, Radio, RadioGroup } from '@material-ui/core'
+    FormControlLabel, Switch, TextField, Radio, RadioGroup } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_VECTOR_ELEM_TYPE_str, UPDATE_VECTOR_ELEM_TYPE_int, UPDATE_VECTOR_ELEM_TYPE_float,
@@ -78,7 +78,6 @@ const VectorInput = () => {
         text = text.trim()
         let lowerBound = parseFloat(text.split('-')[0])
         let upperBound = parseFloat(text.split('-')[1])
-        // console.log("LOWER: "+lowerBound+" UPPER: "+upperBound)
         // CHECK '-'
         if (text.split('-')[2]) {
             setError(true)
@@ -173,25 +172,23 @@ const VectorInput = () => {
                             <RadioGroup row
                                 value={charValue}
                                 onChange={(e)=> {
-                                    setCharValue(charValue)
+                                    setCharValue(e.target.value)
                                     dispatch({
                                         type: UPDATE_CHARSET,
                                         payload: e.target.value
                                     })
                                 }}
                             >
-                                { charsetOptions.map ((option, value="") => {
+                                { charsetOptions.map ((option) => {
                                     return (
                                         // 'key' doesn't serve any purpose here, just to make the erorr goes away
-                                        <Container key={option.label}>
-                                            <FormControlLabel
-                                                label={option.label}
-                                                value={option.value}
-                                                checked={option.value === value}
-                                                control={<Radio/>}
-                                                disabled={option.optionDisabled}
-                                            />
-                                        </Container>
+                                        <FormControlLabel key={option.label}
+                                            label={option.label}
+                                            value={option.value}
+                                            checked={option.value === charValue}
+                                            control={<Radio/>}
+                                            disabled={option.optionDisabled}
+                                        />
                                     )
                                 })}
                                 <Grid container 
@@ -243,27 +240,36 @@ const VectorInput = () => {
                             label="允许字符重复"
                         />
                     </Grid>
-                    <Grid item>
-                        <Grid container>
-                            <Grid item className={classes.line}>
-                                <CardContent>每个Vector元素所含字符数量：</CardContent>
-                            </Grid>
-                            <Grid item className={classes.line}>
-                                <TextField 
-                                    className={classes.text}
-                                    label='Required'
-                                    fullWidth
-                                    dense='true'
-                                    name='delimiter'
-                                    onChange={(e) => dispatch({
-                                        type: UPDATE_NUM_CHARS,
-                                        payload: e.target.value
-                                    })}
-                                    variant='outlined'
-                                />
+
+                    { !floatChecked
+                      ?
+                        <Grid item>
+                            <Grid container>
+                                <Grid item className={classes.line}>
+                                    <CardContent>每个Vector元素所含字符数量：</CardContent>
+                                </Grid>
+                                <Grid item className={classes.line}>
+                                    <TextField 
+                                        className={classes.text}
+                                        label='Required'
+                                        fullWidth
+                                        dense='true'
+                                        name='delimiter'
+                                        onChange={(e) => dispatch({
+                                            type: UPDATE_NUM_CHARS,
+                                            payload: e.target.value
+                                        })}
+                                        variant='outlined'
+                                    />
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
+
+                        :
+
+                        <div/>
+                    }
+
                     <Grid item>
                         <Grid container>
                             <Grid item className={classes.line}>

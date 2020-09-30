@@ -1,7 +1,8 @@
 import React from 'react'
-import { Container, Card, CardContent, Grid, TextField } from '@material-ui/core'
+import { Container, Card, CardContent, Grid, TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
+import { grey } from '@material-ui/core/colors'
 
 const useStyles = makeStyles({
   outputBox: {
@@ -12,11 +13,22 @@ const useStyles = makeStyles({
     paddingBottom: 20,
     minWidth: 200,
     minHeight: 300
+  },
+  button: {
+    marginTop: 100,
+    marginBottom: 20,
+    marginLeft: 80,
+    background: grey[300],
+    minWidth: 80
   }
 })
 
-const renderOutputArea = (output) => {
-    // console.log("output=",output)
+const renderOutputArea = (output, classes) => {
+
+    const copy2clipboard = (output) => {
+        navigator.clipboard.writeText(output)
+    }
+
     if (output === '') {
         return (
             <Container>
@@ -39,9 +51,15 @@ const renderOutputArea = (output) => {
                     label=""
                     multiline
                     rows={8}
-                    defaultValue={output}
+                    value={output}
                     variant="filled"
                 />
+                <Button
+                    className={classes.button}
+                    onClick={copy2clipboard(output)} 
+                >
+                    复制到剪贴板
+                </Button>
             </Container>
         )
     }
@@ -63,8 +81,7 @@ const OutputArea = () => {
                     component={'span'}
                     className={classes.card}
                 >
-
-                    { renderOutputArea(output) }
+                    { renderOutputArea(output, classes) }
 
                 </Card>
             </Grid>
