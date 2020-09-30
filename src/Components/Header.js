@@ -13,11 +13,11 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
       width: drawerWidth,
     },
-    hiddenDrawer: {
-      [theme.breakpoints.down('md')]: {
-        display: 'none',
-      },
-    },
+    // hiddenDrawer: {
+    //   [theme.breakpoints.down('md')]: {
+    //     display: 'none',
+    //   },
+    // },
     appBar: {
       background: grey[50],
       color: grey[700]
@@ -97,7 +97,7 @@ const Header = () => {
                               </Tooltip>
                       }
 
-                      <Button href="/" 
+                      <Button
                         // color="inherit"
                       >
                           <Typography component="span"
