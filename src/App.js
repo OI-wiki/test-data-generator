@@ -30,7 +30,7 @@ const App = () => {
 
                         <Grid item>
                             <SnackbarProvider maxSnack={2}>
-                                <OutputArea/>
+                                <OutputArea />
                             </SnackbarProvider>
                         </Grid>
 

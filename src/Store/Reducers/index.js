@@ -63,7 +63,6 @@ const rootReducer = (state=initState, action) => {
                 allowDuplicate: action.payload
             }
         case ALTER_ALL:
-            console.log('in ALTER_ALL')
             return {
                 ...state,
                 open: false,
