@@ -6,6 +6,7 @@ import InputArea from './Components/InputArea'
 import OutputArea from './Components/OutputArea'
 import Footer from './Components/Footer'
 import ButtonUtil from './Components/ButtonUtil'
+import { SnackbarProvider } from 'notistack'
 
 const App = () => {
   return (
@@ -26,7 +27,13 @@ const App = () => {
                         <Grid item>
                             <ButtonUtil />
                         </Grid>
-                        <Grid item><OutputArea/></Grid>
+
+                        <Grid item>
+                            <SnackbarProvider maxSnack={2}>
+                                <OutputArea/>
+                            </SnackbarProvider>
+                        </Grid>
+
                     </Grid>
                 </Grid>
             </Grid>

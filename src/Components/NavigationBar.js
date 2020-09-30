@@ -18,8 +18,8 @@ const useStyles = makeStyles({
 const items = [
   {id: 0, type: 'String'},
   {id: 1, type: 'Vector'},
-  {id: 2, type: 'Tree'},
-  {id: 3, type: 'Graph'},
+  {id: 2, type: 'Tree(NOT implemented)'},
+  {id: 3, type: 'Graph(NOT implemented)'},
 ]
 
 const NavigationBar = () => {

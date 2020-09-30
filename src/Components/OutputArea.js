@@ -3,6 +3,7 @@ import { Container, Card, CardContent, Grid, TextField, Button } from '@material
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
 import { grey } from '@material-ui/core/colors'
+import { useSnackbar } from 'notistack'
 
 const useStyles = makeStyles({
   outputBox: {
@@ -23,11 +24,15 @@ const useStyles = makeStyles({
   }
 })
 
-const renderOutputArea = (output, classes) => {
+const renderOutputArea = (output, classes, enqueueSnackbar) => {
 
     const copy2clipboard = (output) => {
         navigator.clipboard.writeText(output)
     }
+
+    const handleClickVariant = (variant) => () => {
+        enqueueSnackbar('已复制到剪贴板', { variant });
+      };
 
     if (output === '') {
         return (
@@ -56,7 +61,8 @@ const renderOutputArea = (output, classes) => {
                 />
                 <Button
                     className={classes.button}
-                    onClick={copy2clipboard(output)} 
+                    onClick={copy2clipboard(output)}
+                    onClick={handleClickVariant('success')}
                 >
                     复制到剪贴板
                 </Button>
@@ -67,6 +73,7 @@ const renderOutputArea = (output, classes) => {
 
 const OutputArea = () => {
     const classes = useStyles()
+    const { enqueueSnackbar } = useSnackbar();
     const output = useSelector(state => state.rootReducer.output)
     
     return(
@@ -81,7 +88,7 @@ const OutputArea = () => {
                     component={'span'}
                     className={classes.card}
                 >
-                    { renderOutputArea(output, classes) }
+                    { renderOutputArea(output, classes, enqueueSnackbar) }
 
                 </Card>
             </Grid>
