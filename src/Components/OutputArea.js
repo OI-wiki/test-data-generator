@@ -24,57 +24,16 @@ const useStyles = makeStyles({
   }
 })
 
-const renderOutputArea = (output, classes, enqueueSnackbar) => {
-
-    const copy2clipboard = (output) => {
-        navigator.clipboard.writeText(output)
-    }
-
-    const handleClickVariant = (variant) => () => {
-        enqueueSnackbar('已复制到剪贴板', { variant });
-      };
-
-    if (output === '') {
-        return (
-            <Container>
-                <CardContent>
-                    测试用例输出：
-                </CardContent>
-                <CardContent>
-                    请选择测试用例的数据类型
-                </CardContent>
-            </Container>
-        )
-    }
-    else {
-        return (
-            <Container>
-                <CardContent>
-                    测试用例输出：
-                </CardContent>
-                <TextField
-                    label=""
-                    multiline
-                    rows={8}
-                    value={output}
-                    variant="filled"
-                />
-                <Button
-                    className={classes.button}
-                    onClick={copy2clipboard(output)}
-                    onClick={handleClickVariant('success')}
-                >
-                    复制到剪贴板
-                </Button>
-            </Container>
-        )
-    }
-}
-
 const OutputArea = () => {
     const classes = useStyles()
     const { enqueueSnackbar } = useSnackbar();
     const output = useSelector(state => state.rootReducer.output)
+
+    const copy2clipboard = (variant) => {
+        console.log('CLIPBOARD')
+        navigator.clipboard.writeText(output)
+        enqueueSnackbar('已复制到剪贴板', { variant })
+    }
     
     return(
         <Container fixed
@@ -88,7 +47,41 @@ const OutputArea = () => {
                     component={'span'}
                     className={classes.card}
                 >
-                    { renderOutputArea(output, classes, enqueueSnackbar) }
+
+                { output === ''
+                  ?
+                    <Container>
+                        <CardContent>
+                            测试用例输出：
+                        </CardContent>
+                        <CardContent>
+                            请选择测试用例的数据类型
+                        </CardContent>
+                    </Container>
+                  :
+
+                    <Container>
+                        <CardContent>
+                            测试用例输出：
+                        </CardContent>
+                        <CardContent>
+                            滑动滑块查看完整测试用例 支持手动修改数据
+                        </CardContent>
+                        <TextField
+                            label=""
+                            multiline
+                            rows={8}
+                            value={output}
+                            variant="filled"
+                        />
+                        <Button
+                            className={classes.button}
+                            onClick={() => copy2clipboard('success')}
+                        >
+                            复制到剪贴板
+                        </Button>
+                    </Container>
+                }
 
                 </Card>
             </Grid>
