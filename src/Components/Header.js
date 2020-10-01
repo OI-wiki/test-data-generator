@@ -27,21 +27,18 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up('lg')]: {
-        display: 'none',
-      },
+      // [theme.breakpoints.up('lg')]: {
+      //   display: 'none',
+      // },
     },
     // necessary for content to be below app bar
-    placeholder: {
-      [theme.breakpoints.down('md')]: {
-        minHeight: 64,
-      },
-      minHeight: 48 + 64,
-      alignItems: 'flex-start',
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
+    // placeholder: {
+    //   [theme.breakpoints.down('md')]: {
+    //     minHeight: 64,
+    //   },
+    //   minHeight: 48 + 64,
+    //   alignItems: 'flex-start',
+    // },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
