@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Typography, AppBar, Box, Toolbar, IconButton,
     Button, Tooltip } from '@material-ui/core'
-import { Settings, GitHub, Menu, HighlightOff } from '@material-ui/icons'
+import { Settings, GitHub, Menu, HighlightOff, Palette } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,11 +13,11 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
       width: drawerWidth,
     },
-    hiddenDrawer: {
-      [theme.breakpoints.down('md')]: {
-        display: 'none',
-      },
-    },
+    // hiddenDrawer: {
+    //   [theme.breakpoints.down('md')]: {
+    //     display: 'none',
+    //   },
+    // },
     appBar: {
       background: grey[50],
       color: grey[700]
@@ -27,21 +27,18 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up('lg')]: {
-        display: 'none',
-      },
+      // [theme.breakpoints.up('lg')]: {
+      //   display: 'none',
+      // },
     },
     // necessary for content to be below app bar
-    placeholder: {
-      [theme.breakpoints.down('md')]: {
-        minHeight: 64,
-      },
-      minHeight: 48 + 64,
-      alignItems: 'flex-start',
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
+    // placeholder: {
+    //   [theme.breakpoints.down('md')]: {
+    //     minHeight: 64,
+    //   },
+    //   minHeight: 48 + 64,
+    //   alignItems: 'flex-start',
+    // },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
@@ -50,9 +47,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
     const dispatch = useDispatch();
-    const open = useSelector(state => state.open)
+    const open = useSelector(state => state.rootReducer.open)
     const classes = useStyles()
     const OIWikiGithub = 'https://github.com/OI-wiki/test-data-generator'
+
+    const [mode, setMode] = useState('light')
+    const changeMode = () => {
+        if (mode === 'light')
+          setMode('dark')
+        else
+          setMode('light')
+        console.log('switched MODE to', mode)
+    }
 
     return(
         <Container>
@@ -63,7 +69,7 @@ const Header = () => {
                       display="flex"
                       flexGrow={1}
                     >
-                      {
+                      { 
                         open ?
                               <Tooltip title="关闭菜单">
                                     <IconButton
@@ -88,7 +94,7 @@ const Header = () => {
                               </Tooltip>
                       }
 
-                      <Button href="/" 
+                      <Button
                         // color="inherit"
                       >
                           <Typography component="span"
@@ -99,6 +105,11 @@ const Header = () => {
                     </Box>
                     {/* Right half */}
                     <Box>
+                        <Tooltip title="切换模式" placement="bottom" arrow>
+                          <IconButton onClick={changeMode}>
+                            <Palette />
+                          </IconButton>
+                        </Tooltip>
                         <Tooltip title="设置" placement="bottom" arrow>
                             <IconButton component="a" href="/settings" color="inherit">
                             <Settings />

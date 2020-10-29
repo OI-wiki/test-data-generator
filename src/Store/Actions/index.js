@@ -3,5 +3,5 @@ export * from './StringActions'
 export * from './VectorActions'
 
 export const clearAll = () => ({
-        type: ALTER_ALL 
+    type: ALTER_ALL 
 })

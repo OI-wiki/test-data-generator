@@ -2,7 +2,7 @@ import { SET_OUTPUT } from './ActionTypes'
 
 export const startStringGen = (state, dispatch) => {
     console.log("STRING GEN ACTIONS")
-    const { chars, numChars, delimiter, numCases, allowDuplicate, output } = state
+    const { chars, numChars, delimiter, numCases, allowDuplicate, output } = state.rootReducer
     if (output !== '') {
         console.log('ERROR: output not empty, submit clicked more than once')
     }

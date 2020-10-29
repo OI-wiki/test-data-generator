@@ -18,12 +18,12 @@ const useStyles = makeStyles({
 const items = [
   {id: 0, type: 'String'},
   {id: 1, type: 'Vector'},
-  {id: 2, type: 'Tree'},
-  {id: 3, type: 'Graph'},
+  {id: 2, type: 'Tree(NOT implemented)'},
+  {id: 3, type: 'Graph(NOT implemented)'},
 ]
 
 const NavigationBar = () => {
-    const open = useSelector(state => state.open)
+    const open = useSelector(state => state.rootReducer.open)
     const [value, setValue] = React.useState('')
     const dispatch = useDispatch()
     const classes = useStyles()

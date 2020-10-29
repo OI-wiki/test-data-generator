@@ -1,28 +1,14 @@
 import React from 'react'
-import { Container, Typography, Grid, Button } from '@material-ui/core'
+import { Container, Typography, Grid } from '@material-ui/core'
 import Header from './Components/Header'
 import NavBar from './Components/NavigationBar'
 import InputArea from './Components/InputArea'
 import OutputArea from './Components/OutputArea'
 import Footer from './Components/Footer'
 import ButtonUtil from './Components/ButtonUtil'
-import { makeStyles } from '@material-ui/core/styles'
-import { grey } from '@material-ui/core/colors'
-import StartGenerator from './Store/Actions'
-import { useSelector } from 'react-redux'
-
-const useStyles = makeStyles({
-  button: {
-    marginTop: 100,
-    marginBottom: 20,
-    marginLeft: 80,
-    background: grey[300]
-  }
-})
+import { SnackbarProvider } from 'notistack'
 
 const App = () => {
-  const classes = useStyles()
-  const dataType = useSelector(state => state.dataType)
   return (
     <Container>
         <Typography component={"span"}>
@@ -41,7 +27,13 @@ const App = () => {
                         <Grid item>
                             <ButtonUtil />
                         </Grid>
-                        <Grid item><OutputArea/></Grid>
+
+                        <Grid item>
+                            <SnackbarProvider maxSnack={2}>
+                                <OutputArea />
+                            </SnackbarProvider>
+                        </Grid>
+
                     </Grid>
                 </Grid>
             </Grid>
